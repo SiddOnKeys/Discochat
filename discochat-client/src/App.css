@@ -1,0 +1,153 @@
+body {
+  margin: 0; /* Remove body margins */
+  display: flex;
+  justify-content: center;
+  background-color: #24242a;
+  font-family: "Inter";
+  overflow: hidden;
+}
+
+.chatroom-app {
+  display: flex;
+}
+
+.sidebar {
+  display: flex;
+  width: 600px;
+  justify-content: center;
+}
+.hello {
+  color: white;
+  font-style: italic;
+  font-size: 50px;
+  margin-top: 100px;
+  margin-bottom: 12px;
+  /* margin-right: 5rem; */
+}
+
+.user-stats {
+  color: white;
+  font-style: italic;
+  margin-top: 40px;
+}
+.chat-wrapper {
+  background-color: rgb(39, 34, 49);
+  margin-top: 0px;
+  display: flex;
+  flex-direction: column;
+  background-color: #1a1a1f;
+
+  margin-right: 25%;
+}
+.chatbox {
+  justify-items: center;
+  justify-content: center;
+  background-color: #1a1a1f;
+  width: 600px;
+  max-height: 820px;
+  overflow: auto;
+}
+.chatbox::-webkit-scrollbar {
+  display: none;
+}
+
+.chatbox {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.MessageObject {
+  margin: 30px 10px;
+  display: flex;
+}
+
+.MessageWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.date-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.colour-circle {
+  display: flex;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+}
+.username {
+  font-size: 1.3rem;
+  list-style: none;
+  color: #b8b8e8;
+  display: flex;
+}
+
+.date {
+  display: flex;
+  font-size: 1.2rem;
+  color: #404052;
+  font-style: italic;
+  margin-right: 12px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+.message {
+  list-style: none;
+  color: #fefdff;
+  margin-top: 5px;
+  font-size: 1.3rem;
+  max-width: 350px;
+  word-wrap: break-word;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  padding: 30px 10px;
+}
+/* // Chat forum //  */
+
+button {
+  padding: 8px 24px;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-style: bold;
+  background: #4246c4;
+  border-radius: 10px;
+}
+/* button:hover {
+  background: rgb(87, 55, 149);
+  transition: 0.3s;
+  box-shadow: 0 0 0 3px #1c0135;
+} */
+
+input {
+  border: none;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #f2f2f2;
+  padding: 12px;
+  border-radius: 0.5rem;
+  width: 500px;
+
+  font-size: 14px;
+
+  height: 1.6rem;
+  background-color: #24242a;
+}
+
+input:focus {
+  border: rgb(87, 55, 149);
+  transition: 0.3s;
+  box-shadow: 0 0 0 3px #1c0135;
+}

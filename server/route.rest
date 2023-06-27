@@ -1,0 +1,12 @@
+
+##
+GET http://localhost:3005/
+###
+POST http://localhost:3005/
+
+Content-Type: application/json
+
+{
+"name": "kalu",
+"text": "random text"
+} 
