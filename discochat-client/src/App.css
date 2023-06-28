@@ -1,5 +1,6 @@
 body {
   margin: 0; /* Remove body margins */
+  max-height: 100vh;
   display: flex;
   justify-content: center;
   background-color: #24242a;
@@ -7,14 +8,17 @@ body {
   overflow: hidden;
 }
 
+.chatbox::-webkit-scrollbar {
+  display: none;
+}
 .chatroom-app {
   display: flex;
+  padding-right: 600px;
+  width: 100%;
 }
 
 .sidebar {
-  display: flex;
   width: 600px;
-  justify-content: center;
 }
 .hello {
   color: white;
@@ -31,29 +35,23 @@ body {
   margin-top: 40px;
 }
 .chat-wrapper {
-  background-color: rgb(39, 34, 49);
-  margin-top: 0px;
-  display: flex;
   flex-direction: column;
   background-color: #1a1a1f;
 
-  margin-right: 25%;
+  max-height: 100vh;
 }
-.chatbox {
-  justify-items: center;
-  justify-content: center;
+.chat-wrapper {
+  display: flex;
   background-color: #1a1a1f;
-  width: 600px;
-  max-height: 820px;
-  overflow: auto;
+  height: 100%;
+  overflow-y: scroll;
 }
-.chatbox::-webkit-scrollbar {
+.chat-wrapper::-webkit-scrollbar {
   display: none;
 }
 
 .chatbox {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  overflow-y: scroll;
 }
 
 .MessageObject {
