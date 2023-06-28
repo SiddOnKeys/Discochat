@@ -14,7 +14,6 @@ function MessageInput({ messages, setMessages }) {
     id: Math.random().toString(),
     name: localStorage.getItem("username"),
     text: text,
-    date: new Date(),
   };
 
   useEffect(() => {
