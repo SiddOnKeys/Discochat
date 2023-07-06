@@ -10,10 +10,16 @@ router.post("/test", async (req, res) => {
   Message.findOne({ id: id }).then((docs) => {
     if (docs) {
       let lastDate = docs.date;
+
       Message.find({ date: { $gte: new Date(lastDate) } }).then(
         (newMessages) => {
-          console.log(newMessages);
-          res.send(newMessages);
+          let newMessagesItem = newMessages[newMessages.length - 1];
+          if (newMessagesItem.id == req.body.id) {
+            this.notify;
+            res.send("No new messages");
+          } else {
+            res.send(newMessages);
+          }
         }
       );
     } else {
@@ -25,6 +31,7 @@ router.post("/test", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const messages = await Message.find();
+
     res.json(messages);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -37,6 +44,7 @@ router.post("/", async (req, res) => {
     name: req.body.name,
     text: req.body.text,
     id: req.body.id,
+    image: req.body.image,
   });
 
   try {
