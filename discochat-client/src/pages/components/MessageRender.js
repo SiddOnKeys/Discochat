@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 
-function MessageRender({ messages, setMessages }) {
+function MessageRender({ messages, setMessages, call }) {
   const chatboxRef = useRef(null);
   const generateRandomHexCode = () => {
     const hexCodeArray = [];
@@ -34,8 +34,6 @@ function MessageRender({ messages, setMessages }) {
   const calculateDate = (res) => {
     const serverDate = new Date(res);
     const clientDate = new Date();
-    // console.log("serverdate", serverDate);
-    // console.log("clientdate", clientDate);
 
     let formattedDate;
 
@@ -73,16 +71,18 @@ function MessageRender({ messages, setMessages }) {
     }
   };
   const apiCall = () => {
+    console.log("making api call");
+
     axios
       .get("http://localhost:3005/")
       .then((res) => {
         let array;
-        if (res.data.length >= 100) {
+        if (res.data.length >= 60) {
           array = res.data.slice(-50);
         } else {
           array = res.data;
         }
-
+        console.log(array);
         setMessages(array);
       })
       .catch((err) => {
@@ -98,26 +98,28 @@ function MessageRender({ messages, setMessages }) {
     chatboxRef.current?.lastChild?.scrollIntoView({ behaviour: "smooth" });
   }, [messages]);
 
-  useEffect(() => {
-    messages.map((data) => {
-      const newHexCode = generateRandomHexCode();
-      if (localStorage.getItem(`${data.name}`)) {
-        return;
-      } else {
-        localStorage.setItem(`${data.name}`, newHexCode);
-      }
-    });
-  }, [messages]);
+  const profileColors = (data) => {
+    const newHexCode = generateRandomHexCode();
+    if (localStorage.getItem(`${data.name}`)) {
+      return;
+    } else {
+      localStorage.setItem(`${data.name}`, newHexCode);
+    }
+  };
+
+  // Mapping throught the DB Data response
 
   const getMessages = messages.map((data) => {
     const formattedDate = calculateDate(data.date);
-
+    profileColors(data);
     return (
-      <div className="date-wrap">
+      <div className="date-wrap" key={data.id}>
         <div className="MessageObject" key={data.id}>
           <div
             className="colour-circle"
-            style={{ "background-color": `${localStorage.getItem(data.name)}` }}
+            style={{
+              "background-color": `${localStorage.getItem(data.name)}`,
+            }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -131,10 +133,19 @@ function MessageRender({ messages, setMessages }) {
             </svg>
           </div>
 
-          <div className="MessageWrapper" key={data.id}>
+          <div className="MessageWrapper">
             <div className="username">
               <em>{data.name}</em>
             </div>
+
+            {data.image ? (
+              <span>
+                <img
+                  className={"image-preview " + (data.date ? "" : "overlay")}
+                  src={data.image}
+                ></img>
+              </span>
+            ) : null}
             <div className="message"> {data.text}</div>
           </div>
         </div>
