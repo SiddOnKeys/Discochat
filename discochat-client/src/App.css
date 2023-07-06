@@ -6,6 +6,7 @@ body {
   background-color: #24242a;
   font-family: "Inter";
   overflow: hidden;
+  color: white;
 }
 
 .chatbox::-webkit-scrollbar {
@@ -137,7 +138,7 @@ input {
   padding: 12px;
   border-radius: 0.5rem;
   width: 500px;
-
+  color: white;
   font-size: 14px;
 
   height: 1.6rem;
