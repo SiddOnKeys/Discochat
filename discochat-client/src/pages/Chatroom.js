@@ -18,8 +18,6 @@ function Chatroom() {
         image: undefined,
       };
 
-      console.log({ lastItem });
-
       if (lastItem) {
         axios.post("http://localhost:3005/test", lastItem).then((res) => {
           if (res.data === "error") {
@@ -35,7 +33,7 @@ function Chatroom() {
           }
         });
       }
-    }, 1000);
+    }, 500);
 
     return () => {
       clearInterval(interval);

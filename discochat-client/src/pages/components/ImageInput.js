@@ -32,14 +32,6 @@ function ImageInput({ setPopup, popup }) {
           fill="#48485f"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-          <g
-            id="SVGRepo_tracerCarrier"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke="#CCCCCC"
-            stroke-width="0.048"
-          ></g>
           <g id="SVGRepo_iconCarrier">
             {" "}
             <path
@@ -53,6 +45,7 @@ function ImageInput({ setPopup, popup }) {
         Upload image
       </label>
       <input
+        disabled={true}
         type="file"
         id="upload-file-button"
         className="upload-btn"
@@ -74,19 +67,12 @@ function ImageInput({ setPopup, popup }) {
           xmlns="http://www.w3.org/2000/svg"
           stroke="#48485f"
         >
-          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-          <g
-            id="SVGRepo_tracerCarrier"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></g>
           <g id="SVGRepo_iconCarrier">
             <title>file</title>
             <path d="M4 30.016q0 0.832 0.576 1.408t1.44 0.576h20q0.8 0 1.408-0.576t0.576-1.408v-22.016l-8-8h-13.984q-0.832 0-1.44 0.608t-0.576 1.408v28zM8 28v-24h10.016v6.016h5.984v17.984h-16z"></path>{" "}
           </g>
         </svg>
-        <div style={{ "margin-right": "8px", color: "#48485f" }}>
-          {" "}
+        <div style={{ marginRight: "8px", color: "#48485f" }}>
           Upload a file
         </div>
       </label>

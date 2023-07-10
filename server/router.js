@@ -29,9 +29,11 @@ router.post("/test", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
+  console.log("got request");
+
   try {
     const messages = await Message.find();
-
+    console.log("sent res");
     res.json(messages);
   } catch (err) {
     res.status(500).json({ message: err.message });

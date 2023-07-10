@@ -44,7 +44,7 @@ function MessageRender({ messages, setMessages, call }) {
           hour: "2-digit",
           minute: "2-digit",
         });
-      console.log(formattedDate);
+
       return formattedDate;
     } else if (
       serverDate.getDate() === clientDate.getDate() - 1 &&
@@ -109,9 +109,13 @@ function MessageRender({ messages, setMessages, call }) {
 
   // Mapping throught the DB Data response
 
-  const getMessages = messages.map((data) => {
+  const getMessages = messages.map((data, index) => {
     const formattedDate = calculateDate(data.date);
     profileColors(data);
+    if (index > 0 && data.id === messages[index - 1].id) {
+      // If the current ID is the same as the previous ID, don't return anything
+      return;
+    }
     return (
       <div className="date-wrap" key={data.id}>
         <div className="MessageObject" key={data.id}>
@@ -146,7 +150,9 @@ function MessageRender({ messages, setMessages, call }) {
                 ></img>
               </span>
             ) : null}
-            <div className="message"> {data.text}</div>
+            <div className={"message " + (data.date ? "" : "overlay")}>
+              {data.text}
+            </div>
           </div>
         </div>
         <div className="date">{data.date && <em>{formattedDate}</em>} </div>

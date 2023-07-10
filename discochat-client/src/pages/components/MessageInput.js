@@ -6,9 +6,12 @@ import ImageInput from "./ImageInput";
 function MessageInput({ messages, setMessages, setCall, call }) {
   const [image, setImage] = useState("");
   const [text, setText] = useState();
+  const [isFormValid, setIsFormValid] = useState(false);
   const messagesRef = useRef();
   const textRef = useRef();
   const imageRef = useRef();
+
+  const textInputRef = useRef();
   textRef.current = text;
   imageRef.current = image;
   messagesRef.current = messages;
@@ -36,34 +39,39 @@ function MessageInput({ messages, setMessages, setCall, call }) {
     e.preventDefault();
     setPopup(false);
 
-    const data = {
-      id: Math.random().toString(),
-      name: localStorage.getItem("username"),
-      text: textRef.current,
-      image: imageRef.current,
-    };
-    setMessages([...messagesRef.current, data]);
-    axios
-      .post("http://localhost:3005", data)
-      .then((res) => {
-        const newMessage = res.data;
-        console.log(newMessage);
-        setMessages((messages) =>
-          messages.map((message) => {
-            if (message.id === newMessage.id) {
-              return newMessage;
-            } else {
-              return message;
-            }
-          })
-        );
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (isFormValid) {
+      const data = {
+        id: Math.random().toString(),
+        name: localStorage.getItem("username"),
+        text: textRef.current,
+        image: imageRef.current,
+      };
 
-    setText("");
-    setImage("");
+      setMessages([...messagesRef.current, data]);
+      axios
+        .post("http://localhost:3005", data)
+        .then((res) => {
+          const newMessage = res.data;
+          console.log("MessageSent");
+          setMessages((messages) =>
+            messages.map((message) => {
+              if (message.id === newMessage.id) {
+                return newMessage;
+              } else {
+                return message;
+              }
+            })
+          );
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      setText("");
+      setImage("");
+    } else {
+      console.log("formnotfilled");
+    }
   };
   const [popup, setPopup] = useState(false);
 
@@ -72,8 +80,18 @@ function MessageInput({ messages, setMessages, setCall, call }) {
   };
   const handleImage = (e) => {
     handleSubmit(e);
-    console.log(messagesRef.current);
   };
+
+  useEffect(() => {
+    setIsFormValid(image || text);
+  }, [image, text]);
+
+  useEffect(() => {
+    if (imageRef.current || textRef.current) {
+      textInputRef.current.focus();
+    }
+  }, [imageRef.current, textRef.current]);
+
   return (
     <div className="input-wrapper">
       {image ? (
@@ -96,10 +114,10 @@ function MessageInput({ messages, setMessages, setCall, call }) {
           </div>
 
           <input
+            ref={textInputRef}
             type="text"
             name="text"
             placeholder="Message the group chat!"
-            required
             onChange={updateText}
             value={text}
           ></input>
